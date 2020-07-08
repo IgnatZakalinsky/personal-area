@@ -2,8 +2,8 @@ import React, {useCallback, useState} from "react";
 import s from "./App.module.css";
 import 'antd/dist/antd.css'; // antd
 import {log} from "../../../p1-common/c0-debug/debug";
-import {Button} from "antd";
 import Container from "../../../p1-common/c1-ui/u1-containers/Container";
+import CustomButton from "../../../p1-common/c1-ui/u2-buttons/CustomButton";
 
 const App = React.memo(() => {
     const [test, setTest] = useState<string>('x');
@@ -15,8 +15,8 @@ const App = React.memo(() => {
     return (
         <div className={s.App}>
             <Container renderLog={"2 -- rendering column app div"}>
-                <Button onClick={onClick}>{test}</Button>
-                <Button onClick={onClick2}>{test2}</Button>
+                <CustomButton onClick={onClick} renderLog={"3 --- rendering button 1"}>{test}</CustomButton>
+                <CustomButton onClick={onClick2} renderLog={"3 --- rendering button 2"}>{test2}</CustomButton>
 
 
                 it-incubator
