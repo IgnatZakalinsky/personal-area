@@ -2,6 +2,7 @@ import React, {ReactNode} from "react";
 import {log} from "../../../p1-common/c0-debug/debug";
 import {Switch, Route, Redirect} from "react-router-dom";
 import {v1} from "uuid";
+import LoginPage from "../../../p3-features/f1-auth/a1-login/l1-ui/LoginPage";
 
 type RouteType = {
     _id: string
@@ -11,8 +12,9 @@ type RouteType = {
 }
 
 export const PATH = {
-    DEFAULT: '/',
-    LOGIN: '/login',
+    DEFAULT: "/",
+    LOGIN: "/login",
+    PROFILE: "/profile",
 };
 
 export const routes: RouteType[] = [
@@ -26,7 +28,13 @@ export const routes: RouteType[] = [
         _id: v1(),
         path: PATH.LOGIN,
         exact: true,
-        component: <div>login</div>,
+        component: <LoginPage/>,
+    },
+{
+        _id: v1(),
+        path: PATH.PROFILE,
+        exact: true,
+        component: <div>Profile</div>,
     },
 
     { // 404
