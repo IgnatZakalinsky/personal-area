@@ -1,5 +1,6 @@
 import React, {DetailedHTMLProps, HTMLAttributes} from "react";
 import {log} from "../../c0-debug/debug";
+import s from "./Container.module.css";
 
 type DivPropsType = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
@@ -13,7 +14,7 @@ type ContainerPropsType = DivPropsType & {
 const Container: React.FC<ContainerPropsType> = React.memo((
     {
         direction = "column",
-        style,
+        className,
 
         renderLog,
         ...restProps
@@ -22,7 +23,7 @@ const Container: React.FC<ContainerPropsType> = React.memo((
 
     log(renderLog || `rendering container type ${direction}`);
     return (
-        <div style={{display: "flex", flexFlow: direction, ...style}} {...restProps}/>
+        <div className={`${s[direction]} ${className}`} {...restProps}/>
     );
 });
 
