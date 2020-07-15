@@ -8,8 +8,8 @@ const LoginForm = React.memo(() => {
 
     log("5 ----- rendering LoginForm");
     return (
-        <Container className={s.LoginForm}>
-            loginForm
+        <Container className={s.LoginForm} renderLog={"6 +- rendering LoginForm column"}>
+            login
             <CustomButton>x1</CustomButton>
             <CustomButton>x2</CustomButton>
         </Container>
