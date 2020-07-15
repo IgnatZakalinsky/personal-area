@@ -9,6 +9,7 @@ type ContainerPropsType = DivPropsType & {
     renderLog?: string
 }
 
+// flex container
 const Container: React.FC<ContainerPropsType> = React.memo((
     {
         direction = "column",
