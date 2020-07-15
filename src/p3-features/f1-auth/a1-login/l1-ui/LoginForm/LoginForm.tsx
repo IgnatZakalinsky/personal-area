@@ -6,8 +6,13 @@ import CustomButton from "../../../../../p1-common/c1-ui/u2-buttons/CustomButton
 import CustomInput from "../../../../../p1-common/c1-ui/u2-inputs/CustomInput";
 import {EnterOutlined} from "@ant-design/icons";
 
+type LoginFormPropsType = {
+    token: string
+    setToken: (token: string) => void;
+    sendToken: () => void
+}
 
-const LoginForm = React.memo(() => {
+const LoginForm: React.FC<LoginFormPropsType> = React.memo(({token, setToken, sendToken}) => {
 
     log("5 ----- rendering LoginForm");
     return (
@@ -15,11 +20,14 @@ const LoginForm = React.memo(() => {
             login
             <CustomInput
                 placeholder={"token"}
+                value={token}
+                onChangeText={setToken}
+                onPressEnter={sendToken}
 
                 renderLog={"7 +-- rendering token input"}
                 prefix={"token: "}
-                suffix={<EnterOutlined/>}
-                allowClear
+                suffix={<EnterOutlined onClick={sendToken}/>}
+                // allowClear
             />
         </Container>
     );
