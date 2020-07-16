@@ -10,7 +10,7 @@ export const setBooleanLoading = (dispatch: Dispatch, BOOLEAN_NAMES: string[], l
         {name: BOOLEAN_NAMES[2], value: false}
     ]))
 };
-export const setBooleanError = (dispatch: Dispatch, BOOLEAN_NAMES: string[], error: string) => {
+export const setBooleanError = (dispatch: Dispatch, BOOLEAN_NAMES: string[], error: any) => {
     dispatch(BooleanActions.setBooleanValues([
         {name: BOOLEAN_NAMES[0], value: false},
         {name: BOOLEAN_NAMES[1], value: true, data: error},
