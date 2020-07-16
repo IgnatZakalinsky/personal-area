@@ -7,20 +7,31 @@ import CustomInput from "../../../../../p1-common/c1-ui/u2-inputs/CustomInput";
 import {EnterOutlined} from "@ant-design/icons";
 import {Form} from "antd";
 
+export type LoginFormDataType = {
+    token?: string
+}
+
+export type LoginFormErrorDataType = {
+    values: LoginFormDataType
+    errorFields: {
+        name: (string | number)[]
+        errors: string[]
+    }[]
+    outOfDate: boolean
+}
+
 type LoginFormPropsType = {
+    loading: boolean
     token: string
     setToken: (token: string) => void;
     sendToken: () => void
+    onFinish: (values: LoginFormDataType) => void
+    onFinishFailed: (errorInfo: LoginFormErrorDataType) => void
 }
 
-const LoginForm: React.FC<LoginFormPropsType> = React.memo(({token, setToken, sendToken}) => {
-    const onFinish = (values: any) => {
-        log('Success:', values);
-    };
-    const onFinishFailed = (errorInfo: any) => {
-        log('Failed:', errorInfo);
-    };
-
+const LoginForm: React.FC<LoginFormPropsType> = React.memo((
+    {token, setToken, sendToken, loading, onFinish, onFinishFailed}
+) => {
     log("5 ----- rendering LoginForm");
     return (
         <Container className={s.LoginForm} renderLog={"6 +- rendering LoginForm column"}>
@@ -28,9 +39,10 @@ const LoginForm: React.FC<LoginFormPropsType> = React.memo(({token, setToken, se
 
             <Form
                 name="token form"
-                initialValues={{token: "b8d798e0-a1ae-11ea-b70e-e92253bbd4bd"}}
+                initialValues={{token}}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
+                className={s.form}
             >
                 <Form.Item
                     // label=" "
@@ -61,8 +73,14 @@ const LoginForm: React.FC<LoginFormPropsType> = React.memo(({token, setToken, se
                 </Form.Item>
 
                 <Form.Item>
-                    <CustomButton type="primary" htmlType="submit">
-                        Submit
+                    <CustomButton
+                        htmlType="submit"
+                        className={s.loginButton}
+                        loading={loading}
+
+                        renderLog={"7 +-- rendering login button"}
+                    >
+                        Login
                     </CustomButton>
                 </Form.Item>
             </Form>
