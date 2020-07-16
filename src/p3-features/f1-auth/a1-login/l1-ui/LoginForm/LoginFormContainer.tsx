@@ -5,8 +5,9 @@ import {useBooleanSelector} from "../../../../../p2-main/m2-bll/booleans/useBool
 import {useDispatch} from "react-redux";
 import {sendTokenTC} from "../../l2-bll/sendToken";
 import {clearBooleans} from "../../../../../p2-main/m2-bll/booleans/booleanCallbacks";
-import { Redirect } from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import {PATH} from "../../../../../p2-main/m1-ui/u2-routes/Routes";
+import {message, Spin} from "antd";
 
 const LOGIN_BOOLEAN_NAMES = ["LOGIN/LOADING", "LOGIN/ERROR", "LOGIN/SUCCESS"];
 
@@ -16,6 +17,7 @@ const LoginFormContainer = React.memo(() => {
     const [loading, error, success] = useBooleanSelector(LOGIN_BOOLEAN_NAMES);
     const [firstRendering, setFirstRendering] = useState<boolean>(true);
     const [redirect, setRedirect] = useState<boolean>(false);
+    const [spin, setSpin] = useState<boolean>(true);
 
     const dispatch = useDispatch();
 
@@ -24,10 +26,15 @@ const LoginFormContainer = React.memo(() => {
             clearBooleans(dispatch, LOGIN_BOOLEAN_NAMES);
 
             setFirstRendering(false);
+            setTimeout(() => setSpin(false), 500);
+        } else {
+            if (success.value) {
+                message.success("ok!", 1);
+                setTimeout(() => setRedirect(true), 1500);
+            }
+            if (error.value) message.error(error.data);
         }
-
-        if (success.value) setTimeout(() => setRedirect(true), 1500);
-    }, [dispatch, firstRendering, setFirstRendering, success]);
+    }, [dispatch, firstRendering, setFirstRendering, success, error]);
 
     const sendToken = useCallback(() => {
         if (!loading.value) dispatch(sendTokenTC(token, LOGIN_BOOLEAN_NAMES))
@@ -39,9 +46,11 @@ const LoginFormContainer = React.memo(() => {
     }, [sendToken]);
     const onFinishFailed = useCallback((errorInfo: LoginFormErrorDataType) => {
         log('Failed:', errorInfo);
+        message.error(errorInfo.errorFields[0].errors)
     }, []);
 
     log("4 ---- rendering LoginFormContainer");
+    if (spin) return <Spin size="large"/>;
     if (redirect && !firstRendering) return <Redirect to={PATH.PROFILE}/>;
 
     return (
