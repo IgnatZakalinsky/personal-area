@@ -5,7 +5,7 @@ import Container from "../../../../../p1-common/c1-ui/u1-containers/Container";
 import CustomButton from "../../../../../p1-common/c1-ui/u2-buttons/CustomButton";
 import CustomInput from "../../../../../p1-common/c1-ui/u2-inputs/CustomInput";
 import {EnterOutlined} from "@ant-design/icons";
-import {Checkbox, Form} from "antd";
+import {Form} from "antd";
 
 type LoginFormPropsType = {
     token: string
@@ -14,14 +14,6 @@ type LoginFormPropsType = {
 }
 
 const LoginForm: React.FC<LoginFormPropsType> = React.memo(({token, setToken, sendToken}) => {
-    const layout = {
-        labelCol: {span: 50},
-        wrapperCol: {span: 10},
-    };
-    const tailLayout = {
-        wrapperCol: {offset: 8, span: 16},
-    };
-
     const onFinish = (values: any) => {
         console.log('Success:', values);
     };
@@ -35,30 +27,29 @@ const LoginForm: React.FC<LoginFormPropsType> = React.memo(({token, setToken, se
             login
 
             <Form
-                //{...layout}
-                //name="basic"
-                //initialValues={{ remember: true }}
+                name="token form"
+                initialValues={{token: "b8d798e0-a1ae-11ea-b70e-e92253bbd4bd"}}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
             >
                 <Form.Item
-                    label=" "
+                    // label=" "
                     name="token"
                     rules={[
                         {required: true, message: "Please input your token!"},
-                        // {len: 36, message: "Length must be 36"},
-                        { // Warning: `callback` is deprecated. Please return a promise instead.
-                            validator: (formItemInfo, inputValue, setError) => {
-                                log(formItemInfo, inputValue);
-                                if (inputValue === "test") setError('test error');
-                                else setError();
-                            }
-                        },
+                        // { // Warning: `callback` is deprecated. Please return a promise instead.
+                        //     validator: (formItemInfo, inputValue, setError) => {
+                        //         log(formItemInfo, inputValue);
+                        //         if (inputValue === "test") setError('test error');
+                        //         else setError();
+                        //     }
+                        // },
+                        {len: 36, message: "Length must be 36"},
                     ]}
                 >
                     <CustomInput
-                        prefix={"token: "}
-                        placeholder={"please, input token"}
+                        prefix={"t: "}
+                        placeholder={"* please input token"}
                         value={token}
                         onChangeText={setToken}
                         onPressEnter={sendToken}
@@ -69,11 +60,7 @@ const LoginForm: React.FC<LoginFormPropsType> = React.memo(({token, setToken, se
                     />
                 </Form.Item>
 
-                {/*<Form.Item {...tailLayout} name="remember" valuePropName="checked">*/}
-                {/*    <Checkbox>Remember me</Checkbox>*/}
-                {/*</Form.Item>*/}
-
-                <Form.Item {...tailLayout}>
+                <Form.Item>
                     <CustomButton type="primary" htmlType="submit">
                         Submit
                     </CustomButton>
