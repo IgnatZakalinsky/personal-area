@@ -17,8 +17,8 @@ export const sendTokenTC =
             await tryCatch(
                 async () => {
                     const data = await new Promise(
-                        // (res, rej) => setTimeout(() => res("ok"), 3000)
-                        (res, rej) => setTimeout(() => rej({message: "error"}), 3000)
+                        (res, rej) => setTimeout(() => res("ok"), 3000)
+                        // (res, rej) => setTimeout(() => rej({message: "error"}), 3000)
                     );
                         setBooleanSuccess(dispatch, BOOLEAN_NAMES, true);
                         // dispatch(ProfileActions.setUser(data));
