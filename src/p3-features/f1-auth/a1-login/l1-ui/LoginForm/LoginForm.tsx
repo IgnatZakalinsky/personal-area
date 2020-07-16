@@ -15,10 +15,10 @@ type LoginFormPropsType = {
 
 const LoginForm: React.FC<LoginFormPropsType> = React.memo(({token, setToken, sendToken}) => {
     const onFinish = (values: any) => {
-        console.log('Success:', values);
+        log('Success:', values);
     };
     const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
+        log('Failed:', errorInfo);
     };
 
     log("5 ----- rendering LoginForm");
@@ -51,10 +51,10 @@ const LoginForm: React.FC<LoginFormPropsType> = React.memo(({token, setToken, se
                         prefix={"t: "}
                         placeholder={"* please input token"}
                         value={token}
+                        maxLength={36}
                         onChangeText={setToken}
                         onPressEnter={sendToken}
                         suffix={<EnterOutlined onClick={sendToken}/>}
-                        // allowClear // delete-text-button
 
                         renderLog={"7 +-- rendering token input"}
                     />
