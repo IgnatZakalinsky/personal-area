@@ -4,7 +4,7 @@ import {IS_DEVELOPER_VERSION} from "../../p0-config/config";
 import {booleanReducer} from "./booleans/booleanReducer";
 
 const reducers = combineReducers({
-    booleans: booleanReducer,
+    booleans: booleanReducer, // boolean values for all project
 
 });
 
