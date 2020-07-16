@@ -20,16 +20,14 @@ export default {
     component: CustomInput,
 };
 
-// export const Text = () => <Button onClick={action('clicked')}>Hello Button</Button>;
-
-export const All = () => {
-    const [token, setToken] = useState<string>("test2");
-    const setTokenCallback = (newToken: string) => {
-        setToken(newToken);
-        action("change token: ")(newToken);
+export const AllProps = () => {
+    const [value, setValue] = useState<string>("start value");
+    const setValueCallback = (newValue: string) => {
+        setValue(newValue);
+        action("change value: ")(newValue);
     };
-    const sendToken = () => {
-        action("send token: ")(token);
+    const sendValue = () => {
+        action("send value: ")(value);
     };
 
     const [disabled, setDisabled] = useState<boolean>(false);
@@ -48,23 +46,24 @@ export const All = () => {
                         : (
                             <LockOutlined/>
                         )}
+                    some text
                 </div>
             )}
             prefix={(
                 <>
-                    {"token: "}
+                    {"value: "}
                 </>
             )}
-            placeholder={"* please input token"}
-            defaultValue={""}
-            value={token}
-            maxLength={36}
-            onChangeText={setTokenCallback}
-            onPressEnter={sendToken}
+            placeholder={"* please input value"}
+            // defaultValue={"test default value"} // not worked with value
+            value={value}
+            maxLength={12}
+            onChangeText={setValueCallback}
+            onPressEnter={sendValue}
             allowClear // delete-text-button
             suffix={(
                 <>
-                    <EnterOutlined onClick={sendToken}/>
+                    <EnterOutlined onClick={sendValue}/>
                 </>
             )}
             addonAfter={(
@@ -73,7 +72,7 @@ export const All = () => {
                         title={"nothing to help :("}
                         rotate={45} // deg
                     />
-                    <LoginOutlined onClick={sendToken}/>
+                    <LoginOutlined onClick={sendValue}/>
                     <CheckCircleOutlined
                         // twoToneColor="#ff00ff" // icon must be ..TwoTone like CheckCircleTwoTone
                         style={{color: "#00ff00", fontSize: "24px"}}
@@ -83,7 +82,7 @@ export const All = () => {
                 </>
             )}
 
-            renderLog={"7 +-- rendering token input"}
+            renderLog={"7 +-- rendering input"}
         />
     )
 };
