@@ -2,7 +2,8 @@ import React from "react";
 import {log} from "../../c0-debug/debug";
 import {Button} from "antd";
 import {ButtonProps} from "antd/es/button";
-
+import {ButtonType} from "antd/lib/button/button";
+import s from "./CustomButton.module.css";
 
 type CustomButtonPropsType = ButtonProps & {
 
@@ -11,6 +12,8 @@ type CustomButtonPropsType = ButtonProps & {
 
 const CustomButton: React.FC<CustomButtonPropsType> = React.memo((
     {
+        type = "primary" as ButtonType,
+        className,
 
         renderLog,
         ...restProps
@@ -19,7 +22,7 @@ const CustomButton: React.FC<CustomButtonPropsType> = React.memo((
 
     log(renderLog || `rendering Button`);
     return (
-        <Button {...restProps}/>
+        <Button type={type} className={`${s.base} ${className}`} {...restProps}/>
     );
 });
 
