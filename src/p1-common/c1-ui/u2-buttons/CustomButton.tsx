@@ -22,7 +22,7 @@ const CustomButton: React.FC<CustomButtonPropsType> = React.memo((
 
     log(renderLog || `rendering Button`);
     return (
-        <Button type={type} className={`${s.base} ${className}`} {...restProps}/>
+        <Button type={type} className={className || s.base} {...restProps}/>
     );
 });
 

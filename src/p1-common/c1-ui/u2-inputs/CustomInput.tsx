@@ -27,7 +27,7 @@ const CustomInput: React.FC<CustomInputPropsType> = React.memo((
 
     log(renderLog || `rendering Input`);
     return (
-        <Input onChange={onChangeCallback} className={`${s.base} ${className}`} {...restProps}/>
+        <Input onChange={onChangeCallback} className={className || s.base} {...restProps}/>
     );
 });
 
