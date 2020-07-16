@@ -13,10 +13,11 @@ import {
     LoadingOutlined,
     // https://ant.design/components/icon/
 } from "@ant-design/icons";
+import {log} from "../../c0-debug/debug";
 
 
 export default {
-    title: "CustomInput",
+    title: "S2_CustomInput",
     component: CustomInput,
 };
 
@@ -59,7 +60,9 @@ export const AllProps = () => {
             value={value}
             maxLength={12}
             onChangeText={setValueCallback}
+            onChange={(e) => log(e)}
             onPressEnter={sendValue}
+            onKeyPress={(e) => log(e)}
             allowClear // delete-text-button
             suffix={(
                 <>
