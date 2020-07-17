@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import 'antd/dist/antd.css'; // antd, must be first
+import "antd/dist/antd.css"; // antd, must be first
 import {action} from "@storybook/addon-actions";
 import CustomInput from "./CustomInput";
 import {
