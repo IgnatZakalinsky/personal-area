@@ -1,8 +1,9 @@
 import React, {ReactNode} from "react";
 import {log} from "../../../p1-common/c0-debug/debug";
-import {Switch, Route, Redirect} from "react-router-dom";
+import {Switch, Route, Redirect, NavLink} from "react-router-dom";
 import {v1} from "uuid";
 import LoginPage from "../../../p3-features/f1-auth/a1-login/l1-ui/LoginPage";
+import {IS_DEVELOPER_VERSION} from "../../../p0-config/config";
 
 type RouteType = {
     _id: string
@@ -30,7 +31,7 @@ export const routes: RouteType[] = [
         exact: true,
         component: <LoginPage/>,
     },
-{
+    {
         _id: v1(),
         path: PATH.PROFILE,
         exact: true,
@@ -47,12 +48,23 @@ const Routes = React.memo(() => {
     const routesForRendering = routes.map(r => (
         <Route key={r._id} path={r.path} exact={r.exact} render={() => r.component}/>
     ));
+    const navlinksForDevelopers = routes.map(r => ( // header for developers
+        <NavLink key={r._id} to={r.path || "/error404"}>{r.path || "/error404"}</NavLink>
+    ));
 
     log("2 -- rendering Routes");
     return (
-        <Switch>
-            {routesForRendering}
-        </Switch>
+        <>
+            {IS_DEVELOPER_VERSION && (
+                <div style={{display: "flex", flexWrap: "wrap", justifyContent: "space-between"}}>
+                    {navlinksForDevelopers}
+                </div>
+            )}
+
+            <Switch>
+                {routesForRendering}
+            </Switch>
+        </>
     );
 });
 
