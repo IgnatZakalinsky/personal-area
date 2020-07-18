@@ -32,3 +32,20 @@ const CustomInput: React.FC<CustomInputPropsType> = React.memo((
 });
 
 export default CustomInput;
+
+// class input for antd form
+export class ClassCustomInput extends React.PureComponent<CustomInputPropsType> {
+    render() {
+        const {onChangeText, onChange, renderLog, className, ...restProps} = this.props;
+
+        const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
+            onChange && onChange(e);
+            onChangeText && onChangeText(e.currentTarget.value);
+        };
+
+        log(renderLog || `rendering Input`);
+        return (
+            <Input onChange={onChangeCallback} className={className || s.base} {...restProps}/>
+        );
+    }
+}

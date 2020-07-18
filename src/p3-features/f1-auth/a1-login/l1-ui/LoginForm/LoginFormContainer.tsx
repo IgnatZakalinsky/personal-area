@@ -24,8 +24,8 @@ const LoginFormContainer = React.memo(() => {
 
     const dispatch = useDispatch();
     const sendToken = useCallback(() => {
-        if (!loading.value) dispatch(sendTokenTC(token))
-    }, [dispatch, loading, token]);
+        if (!loading.value && !success.value) dispatch(sendTokenTC(token))
+    }, [dispatch, loading, token, success]);
 
     useEffect(() => {
         if (firstRendering) {
