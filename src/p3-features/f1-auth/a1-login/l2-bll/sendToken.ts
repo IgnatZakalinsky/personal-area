@@ -18,13 +18,12 @@ export const sendTokenTC =
 
             await tryCatch(
                 async () => {
-                    const pingData = await LoginAPI.ping(); // for test, !!! need transfer to main
                     const data = await LoginAPI.login(token);
 
                     setBooleanSuccess(dispatch, LOGIN_BOOLEAN_NAMES, true);
                     // dispatch(ProfileActions.setUser(data));
 
-                    log('Login with token Success!', pingData, data)
+                    log('Login with token Success!', data)
                 },
                 dispatch,
                 LOGIN_BOOLEAN_NAMES,
