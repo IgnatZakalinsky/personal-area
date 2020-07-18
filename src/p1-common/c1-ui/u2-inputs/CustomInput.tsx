@@ -33,7 +33,7 @@ const CustomInput: React.FC<CustomInputPropsType> = React.memo((
 
 export default CustomInput;
 
-// class input for antd form
+// class input for fix antd form
 export class ClassCustomInput extends React.PureComponent<CustomInputPropsType> {
     render() {
         const {onChangeText, onChange, renderLog, className, ...restProps} = this.props;

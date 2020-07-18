@@ -15,7 +15,6 @@ const LoginFormContainer = React.memo(() => {
     const {token: tokenInParams} = useParams();
     log("tokenInParams: ", tokenInParams);
     const [token, setToken] = useState<string>(tokenInParams);
-    // const [token, setToken] = useState<string>("b8d798e0-a1ae-11ea-b70e-e92253bbd4bd");
 
     const [loading, error, success] = useBooleanSelector(LOGIN_BOOLEAN_NAMES);
     const [firstRendering, setFirstRendering] = useState<boolean>(true);
