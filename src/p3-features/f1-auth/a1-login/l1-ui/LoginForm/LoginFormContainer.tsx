@@ -9,42 +9,43 @@ import {Redirect, useParams} from "react-router-dom";
 import {PATH} from "../../../../../p2-main/m1-ui/u2-routes/Routes";
 import {message, Spin} from "antd";
 
-const LOGIN_BOOLEAN_NAMES = ["LOGIN/LOADING", "LOGIN/ERROR", "LOGIN/SUCCESS"];
+export const LOGIN_BOOLEAN_NAMES = ["LOGIN/LOADING", "LOGIN/ERROR", "LOGIN/SUCCESS"];
 
 const LoginFormContainer = React.memo(() => {
-    // const [token, setToken] = useState<string>("");
-    // const [token, setToken] = useState<string>("b8d798e0-a1ae-11ea-b70e-e92253bbd4bd");
     const {token: tokenInParams} = useParams();
-    log("tokenInParams", tokenInParams);
+    log("tokenInParams: ", tokenInParams);
     const [token, setToken] = useState<string>(tokenInParams);
+    // const [token, setToken] = useState<string>("b8d798e0-a1ae-11ea-b70e-e92253bbd4bd");
 
     const [loading, error, success] = useBooleanSelector(LOGIN_BOOLEAN_NAMES);
     const [firstRendering, setFirstRendering] = useState<boolean>(true);
     const [redirect, setRedirect] = useState<boolean>(false);
-    const [spin, setSpin] = useState<boolean>(true);
-
+    const [spin, setSpin] = useState<boolean>(!!tokenInParams); // !!! need add validate(tokenInParams)
 
     const dispatch = useDispatch();
+    const sendToken = useCallback(() => {
+        if (!loading.value) dispatch(sendTokenTC(token))
+    }, [dispatch, loading, token]);
 
     useEffect(() => {
         if (firstRendering) {
             clearBooleans(dispatch, LOGIN_BOOLEAN_NAMES);
+            if (tokenInParams) sendToken(); // !!! need add validate(tokenInParams)
 
             setFirstRendering(false);
-            setTimeout(() => setSpin(false), 500);
         } else {
             if (success.value) {
                 message.success("ok!", 1);
                 setTimeout(() => setRedirect(true), 1500);
             }
-            if (error.value) message.error(error.data);
+            if (error.value) {
+                !spin && message.error(error.data.toString()); // !!! need function objectOrAnyToString(error.data)
+                spin && setSpin(false);
+            }
         }
-    }, [dispatch, firstRendering, setFirstRendering, success, error]);
+    }, [dispatch, firstRendering, setFirstRendering, success, error, tokenInParams, sendToken, spin]);
 
-    const sendToken = useCallback(() => {
-        if (!loading.value) dispatch(sendTokenTC(token, LOGIN_BOOLEAN_NAMES))
-    }, [dispatch, loading, token]);
-
+    // callbacks
     const onFinish = useCallback((values: LoginFormDataType) => {
         log('Success:', values);
         sendToken();
@@ -54,9 +55,10 @@ const LoginFormContainer = React.memo(() => {
         message.error(errorInfo.errorFields[0].errors)
     }, []);
 
+    // render
     log("4 ---- rendering LoginFormContainer");
+    if (redirect) return <Redirect to={PATH.PROFILE}/>;
     if (spin) return <Spin size="large"/>;
-    if (redirect && !firstRendering) return <Redirect to={PATH.PROFILE}/>;
 
     return (
         <LoginForm
