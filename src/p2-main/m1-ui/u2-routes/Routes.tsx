@@ -7,7 +7,7 @@ import ProfilePage from "../../../p3-features/f1-auth/a2-profile/p1-ui/ProfilePa
 import AuthRedirectPage from "../../../p1-common/c1-ui/u4-redirets/AuthRedirectPage";
 import HeaderForDevelopers from "./HeaderForDevelopers";
 
-type RouteType = {
+export type RouteType = {
     _id: string
     path?: string | string[]
     exact?: boolean
@@ -51,15 +51,16 @@ export const routes: RouteType[] = [
     }
 ];
 
+const routesForRendering = routes.map(r => (
+    <Route key={r._id} path={r.path} exact={r.exact} render={() => r.component}/>
+));
+
 const Routes = React.memo(() => {
-    const routesForRendering = routes.map(r => (
-        <Route key={r._id} path={r.path} exact={r.exact} render={() => r.component}/>
-    ));
 
     log("2 -- rendering Routes");
     return (
         <>
-            <HeaderForDevelopers/>
+            <HeaderForDevelopers routes={routes}/>
 
             <Switch>
                 {routesForRendering}

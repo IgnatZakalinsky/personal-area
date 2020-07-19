@@ -1,5 +1,4 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {log} from "../../../../../p1-common/c0-debug/debug";
 import LoginForm, {LoginFormDataType, LoginFormErrorDataType} from "./LoginForm";
 import {useMemoBooleanSelector} from "../../../../../p2-main/m2-bll/booleans/useBooleanSelectors";
 import {useDispatch} from "react-redux";
@@ -9,6 +8,7 @@ import {Redirect, useParams} from "react-router-dom";
 import {PATH} from "../../../../../p2-main/m1-ui/u2-routes/Routes";
 import {message} from "antd";
 import CustomSpin from "../../../../../p1-common/c1-ui/u5-spins/CustomSpin";
+import Log, {log} from "../../../../../p1-common/c0-debug/debug";
 
 export const LOGIN_BOOLEAN_NAMES: [string, string, string] = ["LOGIN/LOADING", "LOGIN/ERROR", "LOGIN/SUCCESS"];
 
@@ -58,20 +58,25 @@ const LoginFormContainer = React.memo(() => {
     }, []);
 
     // render
-    log("4 ---- rendering LoginFormContainer");
+    // log("4 ---- rendering LoginFormContainer");
     if (redirect) return <Redirect to={PATH.PROFILE}/>;
     if (spin) return <CustomSpin renderLog={"4 ----- rendering LoginFormContainer Spin"}/>;
 
     return (
-        <LoginForm
-            loading={loading.value}
-            token={token}
-            setToken={setToken}
-            sendToken={sendToken}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-        />
+        <>
+            <Log s={"4 ---- rendering LoginFormContainer"}/>
+            <LoginForm
+                loading={loading.value}
+                token={token}
+                setToken={setToken}
+                sendToken={sendToken}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+            />
+        </>
     );
 });
 
 export default LoginFormContainer;
+
+

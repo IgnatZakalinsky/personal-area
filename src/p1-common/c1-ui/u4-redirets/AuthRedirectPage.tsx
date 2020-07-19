@@ -1,5 +1,5 @@
 import React, {DetailedHTMLProps, HTMLAttributes, useEffect, useState} from "react";
-import {log} from "../../c0-debug/debug";
+import Log from "../../c0-debug/debug";
 import {useSelector} from "react-redux";
 import {AppStoreType} from "../../../p2-main/m2-bll/store";
 import {message} from "antd";
@@ -33,18 +33,20 @@ const AuthRedirectPage: React.FC<AuthRedirectPagePropsType> = React.memo((
                 message.error("Not logged in!");
                 setTimeout(() => setRedirect(true), 1500);
             }
-            setFirstRendering(false);
+            setFirstRendering(false); // + rerender
         } else {
 
         }
     }, [firstRendering, setFirstRendering, isAuth, setRedirect]);
 
-    log(renderLog || "rendering AuthRedirectPage");
     if (redirect) return <Redirect to={PATH.LOGIN}/>;
     if (spin) return <CustomSpin renderLog={(renderLog || "rendering AuthRedirectPage") + " CustomSpin"}/>;
 
     return (
-        <div {...restProps}/>
+        <>
+            <Log s={renderLog || "rendering AuthRedirectPage"}/>
+            <div {...restProps}/>
+        </>
     );
 });
 

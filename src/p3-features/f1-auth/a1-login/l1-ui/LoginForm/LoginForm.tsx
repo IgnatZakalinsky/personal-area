@@ -1,5 +1,5 @@
 import React from "react";
-import {log} from "../../../../../p1-common/c0-debug/debug";
+import Log from "../../../../../p1-common/c0-debug/debug";
 import s from "./LoginForm.module.css";
 import Container from "../../../../../p1-common/c1-ui/u1-containers/Container";
 import CustomButton from "../../../../../p1-common/c1-ui/u2-buttons/CustomButton";
@@ -37,9 +37,9 @@ type LoginFormPropsType = {
 const LoginForm: React.FC<LoginFormPropsType> = React.memo((
     {token, setToken, sendToken, loading, onFinish, onFinishFailed}
 ) => {
-    log("5 ----- rendering LoginForm");
     return (
         <Container className={s.LoginForm}>
+            <Log s={"5 ----- rendering LoginForm"}/>
             login
 
             <Form
@@ -76,7 +76,7 @@ const LoginForm: React.FC<LoginFormPropsType> = React.memo((
                         onPressEnter={sendToken}
                         suffix={<EnterOutlined onClick={sendToken}/>}
 
-                        renderLog={"7 +-- rendering token input"} // no in antd Input
+                        renderLog={"7 +-- rendering log() token input"} // no in antd Input
                     />
                 </Form.Item>
 
@@ -87,7 +87,7 @@ const LoginForm: React.FC<LoginFormPropsType> = React.memo((
                         className={s.loginButton}
                         loading={loading}
 
-                        renderLog={"7 +-- rendering login button"} // no in antd Button
+                        renderLog={"7 +-- rendering log() login button"} // no in antd Button
                     >
                         Login
                         {/*</Button>*/}

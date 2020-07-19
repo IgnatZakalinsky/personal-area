@@ -4,9 +4,9 @@ import {NavLink} from "react-router-dom";
 import {IS_DEVELOPER_VERSION} from "../../../p0-config/config";
 import {pathHelper} from "./pathHelper";
 import {Divider} from "antd";
-import {routes} from "./Routes";
+import {RouteType} from "./Routes";
 
-const HeaderForDevelopers = React.memo(() => {
+const HeaderForDevelopers: React.FC<{routes: RouteType[]}> = React.memo(({routes}) => {
     const navlinksForDevelopers = routes.map(r => {
         const path = pathHelper(r.path);
 

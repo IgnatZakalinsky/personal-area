@@ -44,8 +44,6 @@ const Ping: React.FC<{show?: boolean}> = React.memo(({show}) => {
 
         }
     }, [firstRendering, setFirstRendering, show]);
-
-    log("0 rendering Ping");
     return null
 });
 
