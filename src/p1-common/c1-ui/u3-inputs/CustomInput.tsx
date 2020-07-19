@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useCallback} from "react";
-import {log} from "../../c0-debug/debug";
+import Log, {log} from "../../c0-debug/debug";
 import {Input} from "antd";
 import {InputProps} from "antd/es/input";
 import s from "./CustomInput.module.css";
@@ -25,9 +25,11 @@ const CustomInput: React.FC<CustomInputPropsType> = React.memo((
         onChangeText && onChangeText(e.currentTarget.value);
     }, [onChange, onChangeText]);
 
-    log(renderLog || `rendering Input`);
     return (
-        <Input onChange={onChangeCallback} className={className || s.base} {...restProps}/>
+        <>
+            <Log s={renderLog || "rendering Input"}/>
+            <Input onChange={onChangeCallback} className={className || s.base} {...restProps}/>
+        </>
     );
 });
 
@@ -43,7 +45,7 @@ export class ClassCustomInput extends React.PureComponent<CustomInputPropsType> 
     render() {
         const {onChangeText, onChange, renderLog, className, ...restProps} = this.props;
 
-        log(renderLog || `rendering Input`);
+        log(renderLog || "rendering Input");
         return (
             <Input onChange={this.onChangeCallback} className={className || s.base} {...restProps}/>
         );
