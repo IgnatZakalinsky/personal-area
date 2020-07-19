@@ -11,3 +11,8 @@
     composes: base;
     flex-direction: row;
 }
+
+.testFlexDirection {
+    composes: base;
+    flex-direction: column-reverse;
+}
