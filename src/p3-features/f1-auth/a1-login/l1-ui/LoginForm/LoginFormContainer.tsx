@@ -7,7 +7,8 @@ import {sendTokenTC} from "../../l2-bll/sendToken";
 import {clearBooleans} from "../../../../../p2-main/m2-bll/booleans/booleanCallbacks";
 import {Redirect, useParams} from "react-router-dom";
 import {PATH} from "../../../../../p2-main/m1-ui/u2-routes/Routes";
-import {message, Spin} from "antd";
+import {message} from "antd";
+import CustomSpin from "../../../../../p1-common/c1-ui/u5-spins/CustomSpin";
 
 export const LOGIN_BOOLEAN_NAMES = ["LOGIN/LOADING", "LOGIN/ERROR", "LOGIN/SUCCESS"];
 
@@ -57,7 +58,7 @@ const LoginFormContainer = React.memo(() => {
     // render
     log("4 ---- rendering LoginFormContainer");
     if (redirect) return <Redirect to={PATH.PROFILE}/>;
-    if (spin) return <Spin size="large"/>;
+    if (spin) return <CustomSpin renderLog={"4 ----- rendering LoginFormContainer Spin"}/>;
 
     return (
         <LoginForm

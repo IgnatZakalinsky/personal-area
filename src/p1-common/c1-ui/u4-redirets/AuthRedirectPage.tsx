@@ -2,9 +2,10 @@ import React, {DetailedHTMLProps, HTMLAttributes, useEffect, useState} from "rea
 import {log} from "../../c0-debug/debug";
 import {useSelector} from "react-redux";
 import {AppStoreType} from "../../../p2-main/m2-bll/store";
-import {message, Spin} from "antd";
+import {message} from "antd";
 import {Redirect} from "react-router-dom";
 import {PATH} from "../../../p2-main/m1-ui/u2-routes/Routes";
+import CustomSpin from "../u5-spins/CustomSpin";
 
 type DivPropsType = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
@@ -40,7 +41,7 @@ const AuthRedirectPage: React.FC<AuthRedirectPagePropsType> = React.memo((
 
     log(renderLog || "rendering AuthRedirectPage");
     if (redirect) return <Redirect to={PATH.LOGIN}/>;
-    if (spin) return <Spin size="large"/>;
+    if (spin) return <CustomSpin renderLog={(renderLog || "rendering AuthRedirectPage") + " CustomSpin"}/>;
 
     return (
         <div {...restProps}/>
