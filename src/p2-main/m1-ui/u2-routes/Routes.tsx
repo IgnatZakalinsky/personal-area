@@ -4,6 +4,9 @@ import {Switch, Route, Redirect, NavLink} from "react-router-dom";
 import {v1} from "uuid";
 import LoginPage from "../../../p3-features/f1-auth/a1-login/l1-ui/LoginPage";
 import {IS_DEVELOPER_VERSION} from "../../../p0-config/config";
+import ProfilePage from "../../../p3-features/f1-auth/a2-profile/p1-ui/ProfilePage";
+import AuthRedirectPage from "../../../p1-common/c1-ui/u4-redirets/AuthRedirectPage";
+import {pathHelper} from "./pathHelper";
 
 type RouteType = {
     _id: string
@@ -36,7 +39,11 @@ export const routes: RouteType[] = [
         _id: v1(),
         path: PATH.PROFILE,
         exact: true,
-        component: <div>Profile</div>,
+        component: (
+            <AuthRedirectPage renderLog={"3 --- rendering AuthRedirectProfilePage"}>
+                <ProfilePage/>
+            </AuthRedirectPage>
+        ),
     },
 
     { // 404
@@ -50,13 +57,7 @@ const Routes = React.memo(() => {
         <Route key={r._id} path={r.path} exact={r.exact} render={() => r.component}/>
     ));
     const navlinksForDevelopers = routes.map(r => { // header for developers
-        let path: string;
-        if (r.path)
-            if (r.path.length) path = r.path[0]; // if path: string[] and path.length > 0
-            else path = typeof r.path === "string"
-                ? r.path // if path: string
-                : "/not-correct-path"; // if path: []
-        else path = "/error404"; // if path undefined
+        const path = pathHelper(r.path);
 
         return (
             <NavLink
