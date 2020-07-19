@@ -18,5 +18,5 @@ export type AppStoreType = ReturnType<typeof reducers>
 
 if (IS_DEVELOPER_VERSION) {
     // @ts-ignore
-    window.store = store; // for dev
+    window.store = store; // for developers
 }

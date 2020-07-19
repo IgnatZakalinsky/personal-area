@@ -7,7 +7,7 @@ export type ReturnVoid = void;
 export type ExtraArgumentNya = {};
 export type GetAppStoreType = () => AppStoreType;
 
-export const tryCatch = async (
+export const tryCatch = async ( // for automatically setting request error
     logic: () => void,
     dispatch: Dispatch,
     BOOLEAN_NAMES: string[],
