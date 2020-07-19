@@ -8,7 +8,16 @@ const Header = React.memo(() => {
     return (
         <>
             <PageHeader
-                title={<a href={"https://it-incubator.by/"} rel="noopener noreferrer" target="_blank">it-incubator</a>}
+                title={(
+                    <>
+                        Personal Area
+                    </>
+                )}
+                subTitle={(
+                    <a href={"https://it-incubator.by/"} rel="noopener noreferrer" target="_blank">
+                        it-incubator
+                    </a>
+                )}
             />
             <Divider/>
         </>
