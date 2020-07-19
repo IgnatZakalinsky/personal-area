@@ -1,22 +1,24 @@
 import {BooleanActionsType, booleanInitialState, BooleanType} from "./BooleanActions";
 
-export const booleanReducer =
-    (state = booleanInitialState, action: BooleanActionsType): typeof booleanInitialState => {
-        switch (action.type) {
-            case "BOOLEAN/SET_VALUES": {
-                const updatedBooleans = changeBooleans(state.booleans, action.booleans);
-                const newBooleans = addBooleans(updatedBooleans, action.booleans);
-                return {
-                    ...state,
-                    booleans: newBooleans,
-                }
-            }
-
-            default: {
-                return state;
+export const booleanReducer = (
+    state = booleanInitialState,
+    action: BooleanActionsType
+): typeof booleanInitialState => {
+    switch (action.type) {
+        case "BOOLEAN/SET_VALUES": {
+            const updatedBooleans = changeBooleans(state.booleans, action.booleans);
+            const newBooleans = addBooleans(updatedBooleans, action.booleans);
+            return {
+                ...state,
+                booleans: newBooleans,
             }
         }
-    };
+
+        default: {
+            return state;
+        }
+    }
+};
 
 export const changeBooleans = (stateBooleans: BooleanType[], actionBooleans: BooleanType[]): BooleanType[] => {
     return stateBooleans.map(stateB => {
