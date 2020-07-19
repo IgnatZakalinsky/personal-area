@@ -51,6 +51,7 @@ test("change boolean 2 to true, without changes", () => {
     const newState = changeBooleans(initialState, actionState);
     expect(newState[0].value).toBe(false);
     expect(newState[1].value).toBe(true);
+    expect(newState[1]).toBe(initialState[1]);
     expect(newState[2].value).toBe(true);
 });
 test("change boolean 4 to true, without changes", () => {

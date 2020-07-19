@@ -24,15 +24,16 @@ export const changeBooleans = (stateBooleans: BooleanType[], actionBooleans: Boo
     return stateBooleans.map(stateB => {
         const foundActionB = actionBooleans.find(actionB => actionB.name === stateB.name);
 
-        return foundActionB ? foundActionB : stateB; // change if find in action
+        if (foundActionB && foundActionB.value !== stateB.value) return foundActionB; // change if find in action and different
+        else return stateB;
     });
 };
 export const addBooleans = (updatedBooleans: BooleanType[], actionBooleans: BooleanType[]): BooleanType[] => {
     const newBooleans = [...updatedBooleans];
 
     for (const actionB of actionBooleans) {
-        if (!newBooleans.find(newB => newB.name === actionB.name)) {
-            newBooleans.push(actionB); // add if not find in state
+        if (actionB.value && !newBooleans.find(newB => newB.name === actionB.name)) {
+            newBooleans.push(actionB); // add if not find in state and not false (default)
         }
     }
     return newBooleans;

@@ -27,7 +27,7 @@ test("add boolean 4 with true", () => {
     expect(newState[2].value).toBe(true);
     expect(newState[3].value).toBe(true); // added
 });
-test("add boolean 0 with false", () => {
+test("add boolean 0 with false, without changes", () => {
     const actionState: BooleanType[] = [
         {name: "0", value: false},
     ];
@@ -35,7 +35,6 @@ test("add boolean 0 with false", () => {
     expect(newState[0].value).toBe(false);
     expect(newState[1].value).toBe(true);
     expect(newState[2].value).toBe(true);
-    expect(newState[3].value).toBe(false); // added
 });
 test("add boolean 2 with true, without changes", () => {
     const actionState: BooleanType[] = [
@@ -79,7 +78,7 @@ test("add boolean 4 and 5 with true", () => {
     expect(newState[4].value).toBe(true); // added
 });
 
-test("add boolean 6 and 7 with false and true", () => {
+test("add boolean 6 and 7 with false and true, just 7", () => {
     const actionState: BooleanType[] = [
         {name: "6", value: false},
         {name: "7", value: true},
@@ -88,10 +87,9 @@ test("add boolean 6 and 7 with false and true", () => {
     expect(newState[0].value).toBe(false);
     expect(newState[1].value).toBe(true);
     expect(newState[2].value).toBe(true);
-    expect(newState[3].value).toBe(false); // added
-    expect(newState[4].value).toBe(true); // added
+    expect(newState[3].value).toBe(true); // added
 });
-test("add boolean 2 and 4 with false", () => {
+test("add boolean 2 and 4 with false, without changes", () => {
     const actionState: BooleanType[] = [
         {name: "2", value: false},
         {name: "4", value: false},
@@ -100,5 +98,4 @@ test("add boolean 2 and 4 with false", () => {
     expect(newState[0].value).toBe(false);
     expect(newState[1].value).toBe(true);
     expect(newState[2].value).toBe(true);
-    expect(newState[3].value).toBe(false); // added
 });
