@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {log} from "../../../../../p1-common/c0-debug/debug";
 import LoginForm, {LoginFormDataType, LoginFormErrorDataType} from "./LoginForm";
-import {useBooleanSelector} from "../../../../../p2-main/m2-bll/booleans/useBooleanSelectors";
+import {useMemoBooleanSelector} from "../../../../../p2-main/m2-bll/booleans/useBooleanSelectors";
 import {useDispatch} from "react-redux";
 import {sendTokenTC} from "../../l2-bll/sendToken";
 import {clearBooleans} from "../../../../../p2-main/m2-bll/booleans/booleanCallbacks";
@@ -10,14 +10,14 @@ import {PATH} from "../../../../../p2-main/m1-ui/u2-routes/Routes";
 import {message} from "antd";
 import CustomSpin from "../../../../../p1-common/c1-ui/u5-spins/CustomSpin";
 
-export const LOGIN_BOOLEAN_NAMES = ["LOGIN/LOADING", "LOGIN/ERROR", "LOGIN/SUCCESS"];
+export const LOGIN_BOOLEAN_NAMES: [string, string, string] = ["LOGIN/LOADING", "LOGIN/ERROR", "LOGIN/SUCCESS"];
 
 const LoginFormContainer = React.memo(() => {
     const {token: tokenInParams} = useParams();
     log("tokenInParams: ", tokenInParams);
     const [token, setToken] = useState<string>(tokenInParams);
 
-    const [loading, error, success] = useBooleanSelector(LOGIN_BOOLEAN_NAMES);
+    const [loading, error, success] = useMemoBooleanSelector(LOGIN_BOOLEAN_NAMES);
     const [firstRendering, setFirstRendering] = useState<boolean>(true);
     const [redirect, setRedirect] = useState<boolean>(false);
     const [spin, setSpin] = useState<boolean>(!!tokenInParams); // !!! need add validate(tokenInParams)
@@ -32,7 +32,7 @@ const LoginFormContainer = React.memo(() => {
             clearBooleans(dispatch, LOGIN_BOOLEAN_NAMES);
             if (tokenInParams) sendToken(); // !!! need add validate(tokenInParams)
 
-            setFirstRendering(false);
+            setFirstRendering(false); // + rerender
         } else {
             if (success.value) {
                 message.success("ok!", 1);
