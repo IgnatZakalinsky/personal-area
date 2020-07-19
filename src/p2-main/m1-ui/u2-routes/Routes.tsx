@@ -1,13 +1,11 @@
 import React, {ReactNode} from "react";
 import {log} from "../../../p1-common/c0-debug/debug";
-import {Switch, Route, Redirect, NavLink} from "react-router-dom";
+import {Switch, Route, Redirect} from "react-router-dom";
 import {v1} from "uuid";
 import LoginPage from "../../../p3-features/f1-auth/a1-login/l1-ui/LoginPage";
-import {IS_DEVELOPER_VERSION} from "../../../p0-config/config";
 import ProfilePage from "../../../p3-features/f1-auth/a2-profile/p1-ui/ProfilePage";
 import AuthRedirectPage from "../../../p1-common/c1-ui/u4-redirets/AuthRedirectPage";
-import {pathHelper} from "./pathHelper";
-import {Divider} from "antd";
+import HeaderForDevelopers from "./HeaderForDevelopers";
 
 type RouteType = {
     _id: string
@@ -57,30 +55,11 @@ const Routes = React.memo(() => {
     const routesForRendering = routes.map(r => (
         <Route key={r._id} path={r.path} exact={r.exact} render={() => r.component}/>
     ));
-    const navlinksForDevelopers = routes.map(r => { // header for developers
-        const path = pathHelper(r.path);
-
-        return (
-            <NavLink
-                key={r._id}
-                to={path}
-            >
-                {path}
-            </NavLink>
-        )
-    });
 
     log("2 -- rendering Routes");
     return (
         <>
-            {IS_DEVELOPER_VERSION && (
-                <>
-                    <div style={{display: "flex", flexWrap: "wrap", justifyContent: "space-between"}}>
-                        {navlinksForDevelopers}
-                    </div>
-                    <Divider/>
-                </>
-            )}
+            <HeaderForDevelopers/>
 
             <Switch>
                 {routesForRendering}
