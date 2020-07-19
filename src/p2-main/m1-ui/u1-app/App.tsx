@@ -6,7 +6,6 @@ import Routes from "../u2-routes/Routes";
 import {HashRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import store from "../../m2-bll/store";
-import Ping from "../u3-ping/Ping";
 import Header from "../u4-header/Header";
 
 const App = React.memo(() => {
@@ -17,7 +16,6 @@ const App = React.memo(() => {
             <Provider store={store}>
                 <HashRouter>
                     <Header/>
-                    <Ping/>
                     <Routes/>
                 </HashRouter>
             </Provider>
