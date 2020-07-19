@@ -5,9 +5,12 @@ export const profileReducer = (
     action: ProfileActionsType
 ): typeof profileInitialState => {
     switch (action.type) {
-        // case "BOOLEAN/SET_VALUES": {
-        //
-        // }
+        case "PROFILE/SET_PROFILE": {
+            return {
+                ...state,
+                isAuth: action.test,
+            }
+        }
 
         default: {
             return state;

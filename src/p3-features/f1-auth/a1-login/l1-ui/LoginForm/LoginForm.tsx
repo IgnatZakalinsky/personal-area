@@ -53,7 +53,7 @@ const LoginForm: React.FC<LoginFormPropsType> = React.memo((
                     // label=" "
                     name="token" // !!! warning !!! // Function components cannot be given refs. // if FunctionalInputComponent
                     rules={[
-                        // {required: true, message: "Please input your token!"},
+                        {required: true, message: "Please input your token!"},
                         // { // !!! warning !!! // findDOMNode is deprecated in StrictMode
                         //     validator: (formItemInfo, inputValue) => {
                         //         log(formItemInfo, inputValue);

@@ -14,9 +14,9 @@ export const profileInitialState = {
 export type ProfileActionsType = InferActionsType<typeof ProfileActions>;
 
 export const ProfileActions = {
-    // setBooleanValues: (booleans: BooleanType[]) => ({
-    //     type: "BOOLEAN/SET_VALUES",
-    //     booleans,
-    // } as const),
+    setProfile: (test: boolean) => ({
+        type: "PROFILE/SET_PROFILE",
+        test,
+    } as const),
 
 };
