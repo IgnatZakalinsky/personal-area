@@ -39,8 +39,11 @@ const LoginFormContainer = React.memo(() => {
                 setTimeout(() => setRedirect(true), 1500);
             }
             if (error.value) {
-                !spin && message.error(error.data.toString()); // !!! need function objectOrAnyToString(error.data)
-                spin && setSpin(false);
+                if (spin) setSpin(false);
+                else {
+                    message.error(error.data.toString()); // !!! need function objectOrAnyToString(error.data)
+                    clearBooleans(dispatch, LOGIN_BOOLEAN_NAMES);
+                }
             }
         }
     }, [dispatch, firstRendering, setFirstRendering, success, error, tokenInParams, sendToken, spin]);
