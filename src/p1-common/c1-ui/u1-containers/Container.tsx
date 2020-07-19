@@ -21,7 +21,7 @@ const Container: React.FC<ContainerPropsType> = React.memo((
     }
 ) => {
 
-    log(renderLog || `rendering container type ${direction}`);
+    renderLog && log(renderLog);
     return (
         <div className={className || s[direction]} {...restProps}/>
     );

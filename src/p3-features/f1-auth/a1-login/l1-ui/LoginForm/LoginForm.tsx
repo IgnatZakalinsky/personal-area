@@ -39,7 +39,7 @@ const LoginForm: React.FC<LoginFormPropsType> = React.memo((
 ) => {
     log("5 ----- rendering LoginForm");
     return (
-        <Container className={s.LoginForm} renderLog={"6 +- rendering LoginForm column"}>
+        <Container className={s.LoginForm}>
             login
 
             <Form
