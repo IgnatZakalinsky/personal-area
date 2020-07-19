@@ -5,14 +5,16 @@ export const instance = axios.create({
     baseURL: BACK_URL,
 });
 
+type PingAnswerType = {
+    backTime: number
+    frontTime: number
+    info: string
+    ping: number
+}
+
 export const MainAPI = {
     ping: async () => {
-        const response = await instance.post<{
-            backTime: number
-            frontTime: number
-            info: string
-            ping: number
-        }>('/ping', {frontTime: new Date().getTime()});
+        const response = await instance.post<PingAnswerType>('/ping', {frontTime: new Date().getTime()});
 
         return response.data;
     },
