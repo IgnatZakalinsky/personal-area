@@ -7,6 +7,7 @@ import {IS_DEVELOPER_VERSION} from "../../../p0-config/config";
 import ProfilePage from "../../../p3-features/f1-auth/a2-profile/p1-ui/ProfilePage";
 import AuthRedirectPage from "../../../p1-common/c1-ui/u4-redirets/AuthRedirectPage";
 import {pathHelper} from "./pathHelper";
+import {Divider} from "antd";
 
 type RouteType = {
     _id: string
@@ -73,9 +74,12 @@ const Routes = React.memo(() => {
     return (
         <>
             {IS_DEVELOPER_VERSION && (
-                <div style={{display: "flex", flexWrap: "wrap", justifyContent: "space-between"}}>
-                    {navlinksForDevelopers}
-                </div>
+                <>
+                    <div style={{display: "flex", flexWrap: "wrap", justifyContent: "space-between"}}>
+                        {navlinksForDevelopers}
+                    </div>
+                    <Divider/>
+                </>
             )}
 
             <Switch>
