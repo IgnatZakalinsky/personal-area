@@ -21,10 +21,9 @@ export const sendTokenTC =
                 async () => {
                     const data = await LoginAPI.login(token);
 
+                    log('Login with token Success!', data);
                     setBooleanSuccess(dispatch, LOGIN_BOOLEAN_NAMES, true);
                     dispatch(ProfileActions.setProfile(true));
-
-                    log('Login with token Success!', data)
                 },
                 dispatch,
                 LOGIN_BOOLEAN_NAMES,
