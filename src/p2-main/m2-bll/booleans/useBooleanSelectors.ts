@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
 import {AppStoreType} from "../store";
 import {BooleanType} from "./BooleanActions";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 // import {createSelector} from "reselect";
 // import {log} from "../../../p1-common/c0-debug/debug";
 
@@ -30,13 +30,21 @@ export const useMemoBooleanSelector = (names: [string, string, string]) => {
     // + 1 save rerender, not rerender children with props and callback with loading, error, success
     const [newLoading, newError, newSuccess] = useBooleanSelector(names);
 
-    useEffect(() => {
-        if (newLoading.value !== loading.value) setLoading(newLoading);
-        if (newError.value !== error.value) setError(newError);
-        if (newSuccess.value !== success.value) setSuccess(newSuccess);
-    }, [newLoading, setLoading, loading, newError, setError, error, newSuccess, setSuccess, success]);
+    const result = [loading, error, success];
+    if (newLoading.value !== loading.value) {
+        result[0] = newLoading;
+        setLoading(newLoading);
+    }
+    if (newError.value !== error.value) {
+        result[1] = newError;
+        setError(newError);
+    }
+    if (newSuccess.value !== success.value) {
+        result[2] = newSuccess;
+        setSuccess(newSuccess);
+    }
 
-    return [loading, error, success];
+    return result;
 };
 
 // reselect, not completed, useMemoBooleanSelector simplest

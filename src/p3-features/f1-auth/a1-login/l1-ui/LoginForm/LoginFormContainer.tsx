@@ -14,7 +14,6 @@ export const LOGIN_BOOLEAN_NAMES: [string, string, string] = ["LOGIN/LOADING", "
 
 const LoginFormContainer = React.memo(() => {
     const {token: tokenInParams} = useParams();
-    log("tokenInParams: ", tokenInParams);
     const [token, setToken] = useState<string>(tokenInParams);
 
     const [loading, error, success] = useMemoBooleanSelector(LOGIN_BOOLEAN_NAMES);
