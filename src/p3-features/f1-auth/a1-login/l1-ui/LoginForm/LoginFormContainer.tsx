@@ -23,13 +23,13 @@ const LoginFormContainer = React.memo(() => {
 
     const dispatch = useDispatch();
     const sendToken = useCallback(() => {
-        if (!loading.value && !success.value) dispatch(sendTokenTC(token))
+        if (!loading.value && !success.value && token) dispatch(sendTokenTC(token)) // !!! need add validate(tokenInParams)
     }, [dispatch, loading, token, success]);
 
     useEffect(() => {
         if (firstRendering) {
             clearBooleans(dispatch, LOGIN_BOOLEAN_NAMES);
-            if (tokenInParams) sendToken(); // !!! need add validate(tokenInParams)
+            sendToken();
 
             setFirstRendering(false); // + rerender
         } else {
