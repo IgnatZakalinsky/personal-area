@@ -8,10 +8,10 @@ import Ping from "./p2-main/m1-ui/u3-ping/Ping";
 ReactDOM.render(
     <>
         {/*off StrictMode if release*/}
-        {/*<React.StrictMode>*/}
+        <React.StrictMode>
             <Ping show/>
             <App/>
-        {/*</React.StrictMode>*/}
+        </React.StrictMode>
     </>,
     document.getElementById('root')
 );

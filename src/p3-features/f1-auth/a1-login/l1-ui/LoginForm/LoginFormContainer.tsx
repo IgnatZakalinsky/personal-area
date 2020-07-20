@@ -59,7 +59,7 @@ const LoginFormContainer = React.memo(() => {
 
     // render
     if (redirect) return <Redirect to={PATH.PROFILE}/>;
-    if (spin) return <CustomSpin renderLog={"4 ----- rendering LoginFormContainer Spin"}/>;
+    if (spin || success.value) return <CustomSpin renderLog={"4 ----- rendering LoginFormContainer Spin"}/>;
 
     return (
         <>
