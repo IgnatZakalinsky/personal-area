@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from "react";
-import {log} from "../../../p1-common/c0-debug/debug";
 import {MainAPI} from "../../m3-dal/instance";
 import {notification} from "antd";
 
-const Ping: React.FC<{show?: boolean}> = React.memo(({show}) => {
+const Ping: React.FC<{ show?: boolean }> = React.memo(({show}) => {
     const [firstRendering, setFirstRendering] = useState<boolean>(true);
     useEffect(() => {
         if (firstRendering) {
             MainAPI.ping() // for test, wake up back
                 .then(data => {
-                    log("ping request: ", data);
+                    console.warn("ping: ", data.ping);
                     const ping = new Date().getTime() - data.backTime;
+
                     show && notification.info({
                         message: (
                             <>
@@ -20,10 +20,11 @@ const Ping: React.FC<{show?: boolean}> = React.memo(({show}) => {
                         ),
                         placement: "bottomLeft",
                     });
-                    MainAPI.ping() // for test, wake up back
+                    MainAPI.ping() // real ping, after wake up back
                         .then(data => {
-                            log("ping request: ", data);
+                            console.warn("ping: ", data.ping);
                             const ping = new Date().getTime() - data.backTime;
+
                             show && notification.info({
                                 message: (
                                     <>
@@ -35,9 +36,9 @@ const Ping: React.FC<{show?: boolean}> = React.memo(({show}) => {
                             });
 
                         })
-                        .catch(e => log("ping request error object: ", {...e}));
+                        .catch(e => console.error("ping request error object: ", {...e}));
                 })
-                .catch(e => log("ping request error object: ", {...e}));
+                .catch(e => console.error("ping request error object: ", {...e}));
 
             setFirstRendering(false);
         } else {

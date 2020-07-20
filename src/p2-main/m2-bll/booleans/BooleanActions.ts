@@ -8,7 +8,8 @@ export type BooleanType = {
 
 export const booleanInitialState = {
     booleans: [
-        // {name: "loading", value: true}
+        // {name: "loading", value: true} // set initial booleans
+
     ] as BooleanType[],
 };
 

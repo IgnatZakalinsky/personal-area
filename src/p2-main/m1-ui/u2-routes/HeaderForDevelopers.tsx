@@ -6,7 +6,7 @@ import {pathHelper} from "./pathHelper";
 import {Divider} from "antd";
 import {RouteType} from "./Routes";
 
-const HeaderForDevelopers: React.FC<{routes: RouteType[]}> = React.memo(({routes}) => {
+const HeaderForDevelopers: React.FC<{ routes: RouteType[] }> = React.memo(({routes}) => {
     const navlinksForDevelopers = routes.map(r => {
         const path = pathHelper(r.path);
 

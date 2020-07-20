@@ -53,12 +53,11 @@ const LoginFormContainer = React.memo(() => {
         sendToken();
     }, [sendToken]);
     const onFinishFailed = useCallback((errorInfo: LoginFormErrorDataType) => {
-        log('Failed:', errorInfo);
+        console.error('Failed:', errorInfo);
         message.error(errorInfo.errorFields[0].errors)
     }, []);
 
     // render
-    // log("4 ---- rendering LoginFormContainer");
     if (redirect) return <Redirect to={PATH.PROFILE}/>;
     if (spin) return <CustomSpin renderLog={"4 ----- rendering LoginFormContainer Spin"}/>;
 
